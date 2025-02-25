@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:1.52
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "6831:6831/udp"     # Agent - aceita dados no formato Jaeger Thrift via UDP
+      - "6832:6832/udp"     # Agent - aceita dados no formato Jaeger Thrift via UDP (compact)
+      - "5778:5778"         # Agent - serve configurações via HTTP
+      - "16686:16686"       # UI - interface web do Jaeger
+      - "4317:4317"         # OTLP gRPC
+      - "4318:4318"         # OTLP HTTP
+      - "14250:14250"       # Collector - aceita modelo de dados Jaeger diretamente
+      - "14268:14268"       # Collector - aceita formatos Jaeger diretamente
+      - "14269:14269"       # Admin port: health check
+      - "9411:9411"         # Collector - aceita spans no formato Zipkin
+    networks:
+      - jaeger-network
+
+networks:
+  jaeger-network:
+    driver: bridge
