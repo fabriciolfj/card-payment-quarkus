@@ -3,7 +3,6 @@ package com.github.card.adapters.repositories.purchase.repository;
 import com.github.card.entities.physical.Purchase;
 import com.github.card.usecases.common.PurchaseSaveGateway;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,6 @@ public class PurchaseSaveAdapter implements PurchaseSaveGateway {
     private final PurchaseRepository repository;
 
     @Override
-    @Transactional(Transactional.TxType.REQUIRED)
     public void process(Purchase purchase) {
         var data = PurchaseDataMapper.INSTANCE.toData(purchase);
 
