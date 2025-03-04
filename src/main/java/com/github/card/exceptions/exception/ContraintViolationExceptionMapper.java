@@ -1,14 +1,15 @@
-package com.github.card.exceptions;
+package com.github.card.exceptions.exception;
 
+import com.github.card.exceptions.dto.DetailsErrorDTO;
+import com.github.card.exceptions.dto.ErrorDTO;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Provider
 public class ContraintViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException> {
@@ -16,24 +17,23 @@ public class ContraintViolationExceptionMapper implements ExceptionMapper<Constr
     @Override
     public Response toResponse(ConstraintViolationException exception) {
         final Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
-        final Map<String, String> errors = new HashMap<>();
 
-        for (ConstraintViolation<?> violation : violations) {
-            String propertyPath = violation.getPropertyPath().toString();
-            String field = propertyPath.contains(".")
+        var errors = violations.stream().map(violation -> {
+            final String propertyPath = violation.getPropertyPath().toString();
+            final String field = propertyPath.contains(".")
                     ? propertyPath.substring(propertyPath.lastIndexOf('.') + 1)
                     : propertyPath;
 
-            errors.put(field, violation.getMessage());
-        }
+            return new DetailsErrorDTO(field, violation.getMessage());
+        }).toList();
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", System.currentTimeMillis());
-        response.put("status", Response.Status.BAD_REQUEST.getStatusCode());
-        response.put("errors", errors);
+        var dto = new ErrorDTO(Response.Status.BAD_REQUEST.getStatusCode(),
+                System.currentTimeMillis(),
+                "fail request",
+                errors);
 
         return Response.status(Response.Status.BAD_REQUEST)
-                .entity(response)
+                .entity(dto)
                 .build();
     }
 }

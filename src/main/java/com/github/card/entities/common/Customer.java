@@ -1,3 +1,3 @@
-package com.github.card.entities;
+package com.github.card.entities.common;
 
 public record Customer(String code) { }
