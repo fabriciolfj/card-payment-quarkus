@@ -17,7 +17,7 @@ public class PurchasePhysicalNotifyAdapter implements PurchasePhysicalNotifyGate
     private static final Logger log = LoggerFactory.getLogger(PurchasePhysicalNotifyAdapter.class);
 
     @Inject
-    @Channel("analyze")
+    @Channel("analyze-out")
     private Emitter<String> analyseEmitter;
 
     @Override

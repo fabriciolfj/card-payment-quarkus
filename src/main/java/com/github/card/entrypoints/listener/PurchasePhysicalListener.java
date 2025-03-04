@@ -11,7 +11,7 @@ public class PurchasePhysicalListener {
 
     private static final Logger log = LoggerFactory.getLogger(PurchasePhysicalListener.class);
 
-    @Incoming("analyze-out")
+    @Incoming("analyze")
     @Retry(delay = 10, maxRetries = 5)
     public void consume(String json) {
         log.info("message receive to analyse {}", json);
