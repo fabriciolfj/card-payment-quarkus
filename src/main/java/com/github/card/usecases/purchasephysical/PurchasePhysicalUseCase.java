@@ -3,6 +3,7 @@ package com.github.card.usecases.purchasephysical;
 import com.github.card.entities.physical.Purchase;
 import com.github.card.usecases.common.PurchaseSaveGateway;
 import com.github.card.usecases.common.PurchaseUseCase;
+import com.github.card.util.TypePurchaseConst;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
@@ -30,5 +31,10 @@ public class PurchasePhysicalUseCase implements PurchaseUseCase {
                     return p;
                 })
                 .orElseThrow(() -> new IllegalArgumentException("purchase cannot be null"));
+    }
+
+    @Override
+    public String getType() {
+        return TypePurchaseConst.PHYSICAL;
     }
 }

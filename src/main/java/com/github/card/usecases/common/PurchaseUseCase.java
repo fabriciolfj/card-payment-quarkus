@@ -5,4 +5,6 @@ import com.github.card.entities.physical.Purchase;
 public interface PurchaseUseCase {
 
     void execute(final Purchase purchase);
+
+    String getType();
 }

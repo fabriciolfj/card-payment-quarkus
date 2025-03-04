@@ -29,11 +29,11 @@ public class CardData {
 
     private BigDecimal balance;
 
-    @JoinColumn(name = "purchase_id")
     @JoinTable(
             name = "card_purchase",
             joinColumns = @JoinColumn(name = "card_id"),
             inverseJoinColumns = @JoinColumn(name = "purchase_id")
     )
+    @ManyToMany
     private List<PurchaseData> purchases;
 }

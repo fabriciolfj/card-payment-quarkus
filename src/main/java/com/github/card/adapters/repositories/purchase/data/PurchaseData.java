@@ -16,7 +16,7 @@ public class PurchaseData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchases")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "purchases")
     private List<CardData> cards;
 
     @Enumerated(EnumType.ORDINAL)
