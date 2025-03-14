@@ -12,7 +12,7 @@ public class PurchaseUseCaseProducer {
     @Produces
     @ApplicationScoped
     public Map<String, PurchaseUseCase> producePurchaseUseCases(final Instance<PurchaseUseCase> useCases) {
-        Map<String, PurchaseUseCase> useCaseMap = new HashMap<>();
+        final Map<String, PurchaseUseCase> useCaseMap = new HashMap<>();
 
         for (PurchaseUseCase useCase : useCases) {
             useCaseMap.put(useCase.getType(), useCase);
