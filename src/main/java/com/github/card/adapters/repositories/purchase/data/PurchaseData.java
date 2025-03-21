@@ -22,12 +22,12 @@ public class PurchaseData {
     @Enumerated(EnumType.ORDINAL)
     private TypePurchase type;
 
-    @Column(nullable = true)
+    @Column()
     private double latitude;
 
-    @Column(nullable = true)
+    @Column()
     private double longitude;
 
-    @Column(nullable = true)
+    @Column()
     private double radiusKm;
 }
