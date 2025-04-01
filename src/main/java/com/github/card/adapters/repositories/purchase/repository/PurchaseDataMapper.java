@@ -11,4 +11,6 @@ public interface PurchaseDataMapper {
     PurchaseDataMapper INSTANCE = Mappers.getMapper(PurchaseDataMapper.class);
 
     PurchaseData toData(Purchase purchase);
+    
+    Purchase toDomain(PurchaseData data);
 }

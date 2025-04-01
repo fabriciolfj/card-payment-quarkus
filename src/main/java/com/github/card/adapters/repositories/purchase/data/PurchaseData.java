@@ -15,6 +15,9 @@ public class PurchaseData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false)
+    private String code;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "purchases")
     private List<CardData> cards;
