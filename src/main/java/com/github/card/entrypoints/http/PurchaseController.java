@@ -46,6 +46,6 @@ public class PurchaseController {
         log.info("Received request to get purchase with code: {}", code);
         return findPurchaseByCodeUseCase.execute(code)
                 .map(PurchaseResponseMapper.INSTANCE::toDto)
-                .orElseThrow(() -> new jakarta.ws.rs.NotFoundException("Purchase not found with code: " + code));
+                .orElseThrow(() -> new com.github.card.exceptions.exception.PurchaseCodeNotFoundException(code));
     }
 }
