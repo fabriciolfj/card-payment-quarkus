@@ -44,8 +44,7 @@ public class PurchaseController {
     @Produces(MediaType.APPLICATION_JSON)
     public PurchaseResponseDTO getPurchase(@PathParam("code") final String code) {
         log.info("Received request to get purchase with code: {}", code);
-        return findPurchaseByCodeUseCase.execute(code)
-                .map(PurchaseResponseMapper.INSTANCE::toDto)
-                .orElseThrow(() -> new com.github.card.exceptions.exception.PurchaseCodeNotFoundException(code));
+        var purchase = findPurchaseByCodeUseCase.execute(code);
+        return PurchaseResponseMapper.INSTANCE.toDto(purchase);
     }
 }

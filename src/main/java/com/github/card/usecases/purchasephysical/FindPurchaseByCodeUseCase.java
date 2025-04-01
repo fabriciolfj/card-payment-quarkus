@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Named;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @ApplicationScoped
@@ -21,7 +20,7 @@ public class FindPurchaseByCodeUseCase {
     private final FindPurchaseByCodeGateway gateway;
     
     @Transactional(Transactional.TxType.SUPPORTS)
-    public Optional<Purchase> execute(String code) {
+    public Purchase execute(String code) {
         log.info("Executing find purchase by code use case for: {}", code);
         return gateway.findByCode(code);
     }
