@@ -1,5 +1,6 @@
-package com.github.card.adapters.repositories.purchase.repository;
+package com.github.card.adapters.purchase;
 
+import com.github.card.adapters.repositories.purchase.repository.PurchaseRepository;
 import com.github.card.entities.physical.Purchase;
 import com.github.card.exceptions.exception.PurchaseCodeNotFoundException;
 import com.github.card.usecases.common.FindPurchaseByCodeGateway;
@@ -20,7 +21,7 @@ public class FindPurchaseByCodeAdapter implements FindPurchaseByCodeGateway {
     public Purchase findByCode(String code) {
         log.info("Finding purchase by code: {}", code);
         return repository.findByCode(code)
-                .map(PurchaseDataMapper.INSTANCE::toDomain)
+                .map(PurchaseDataMapper::toEntity)
                 .orElseThrow(() -> new PurchaseCodeNotFoundException(code));
     }
 }

@@ -10,5 +10,7 @@ public interface CustomerDataMapper {
 
     CustomerDataMapper INSTANCE = Mappers.getMapper(CustomerDataMapper.class);
 
-    CustomerData toData(Customer customer);
+    CustomerData toData(final Customer customer);
+
+    Customer toEntity(final CustomerData data);
 }

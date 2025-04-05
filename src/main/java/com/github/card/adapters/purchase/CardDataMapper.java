@@ -12,5 +12,8 @@ public interface CardDataMapper {
     CardDataMapper INSTANCE = Mappers.getMapper(CardDataMapper.class);
 
     @Mapping(source = "value", target = "balance")
-    CardData toData(Card card);
+    CardData toData(final Card card);
+
+    @Mapping(source = "balance", target = "value")
+    Card toEntity(final CardData data);
 }

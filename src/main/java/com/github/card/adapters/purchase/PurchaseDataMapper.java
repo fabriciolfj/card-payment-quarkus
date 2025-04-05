@@ -1,6 +1,7 @@
 package com.github.card.adapters.purchase;
 
 import com.github.card.adapters.repositories.purchase.data.PurchaseData;
+import com.github.card.entities.physical.GeoLocation;
 import com.github.card.entities.physical.Purchase;
 import java.util.List;
 
@@ -20,5 +21,15 @@ public class PurchaseDataMapper {
                 .longitude(entity.getLongitude())
                 .latitude(entity.getLatitude())
                 .build();
+    }
+
+    public static Purchase toEntity(final PurchaseData data) {
+        var card = CardDataMapper.INSTANCE.toEntity(data.getCards().getFirst());
+        var customer =  CustomerDataMapper.INSTANCE.toEntity(data.getCustomer());
+
+        return new Purchase(data.getCode(),
+                card,
+                customer,
+                new GeoLocation(data.getLongitude(), data.getLongitude()));
     }
 }
