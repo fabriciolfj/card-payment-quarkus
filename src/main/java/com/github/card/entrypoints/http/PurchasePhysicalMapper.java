@@ -12,7 +12,9 @@ public interface PurchasePhysicalMapper {
 
 
     @Mapping(source = "geo", target = "geoLocation")
-    @Mapping(source = "customer", target = "customer.code")
+    @Mapping(source = "customer.code", target = "customer.code")
+    @Mapping(source = "customer.latitude", target = "customer.latitude")
+    @Mapping(source = "customer.longitude", target = "customer.longitude")
     @Mapping(source = "expirationDate", target = "card.expirationDate")
     @Mapping(source = "value", target = "card.value")
     @Mapping(source = "crypt", target = "card.crypt")

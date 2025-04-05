@@ -5,7 +5,6 @@ import com.github.card.usecases.common.PurchaseSaveGateway;
 import com.github.card.usecases.common.PurchaseUseCase;
 import com.github.card.util.TypePurchaseConst;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
@@ -21,7 +20,6 @@ public class PurchasePhysicalUseCase implements PurchaseUseCase {
     private final PurchasePhysicalNotifyGateway notifyGateway;
 
     @Override
-    @Transactional(Transactional.TxType.REQUIRED)
     public void execute(Purchase purchase) {
         ofNullable(purchase)
                 .map(p -> {

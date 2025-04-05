@@ -18,8 +18,8 @@ public record PurchasePhysicalDTO(@NotBlank(message = "{purchase.code}")
                                   BigDecimal value,
                                   @NotBlank(message = "{purchase.crypt}")
                                   String crypt,
-                                  @NotBlank(message = "{purchase.customer}")
-                                  String customer,
+                                  @NotNull(message = "{purchase.customer}")
+                                  CustomerDTO customer,
                                   @NotNull(message = "{purchase.geo}")
                                   GeoLocationDTO geo){ }
 

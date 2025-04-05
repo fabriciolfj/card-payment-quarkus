@@ -1,10 +1,17 @@
+create table customer (
+    id serial primary key,
+    code varchar(255) not null,
+    latitude DOUBLE PRECISION not null,
+    longitude DOUBLE PRECISION not null
+);
+
 -- Criação da tabela de compra
 CREATE TABLE purchase (
     id SERIAL PRIMARY KEY,
-    type SMALLINT NOT NULL, -- Enumeração para TypePurchase (ORDINAL)
     latitude DOUBLE PRECISION,
     longitude DOUBLE PRECISION,
-    radius_km DOUBLE PRECISION
+    customer_id bigint,
+    constraint fk_customer foreign key (customer_id) references customer (id)
 );
 
 -- Criação da tabela de cartão
@@ -27,3 +34,4 @@ CREATE TABLE card_purchase (
 -- Adicionando índices para melhorar performance de buscas
 CREATE INDEX idx_card_expiration ON card (expiration_date);
 CREATE INDEX idx_purchase_location ON purchase (latitude, longitude);
+create INDEX idx_custome_code on customer(code);

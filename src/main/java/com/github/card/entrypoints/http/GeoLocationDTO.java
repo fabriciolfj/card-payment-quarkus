@@ -7,6 +7,4 @@ import jakarta.validation.constraints.NotNull;
 public record GeoLocationDTO(@NotNull(message = "{geolation.latitude}")
                              double latitude,
                              @NotNull(message = "{geolation.longitude}")
-                             double longitude,
-                             @NotNull(message = "{geolation.radiusKm}")
-                             double radiusKm) { }
+                             double longitude) { }
