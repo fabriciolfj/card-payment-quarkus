@@ -1,5 +1,9 @@
 package com.github.card.entrypoints.http;
 
+import com.github.card.entrypoints.dto.PurchasePhysicalDTO;
+import com.github.card.entrypoints.dto.PurchaseResponseDTO;
+import com.github.card.entrypoints.mapper.PurchasePhysicalMapper;
+import com.github.card.entrypoints.mapper.PurchaseResponseMapper;
 import com.github.card.usecases.common.PurchaseUseCase;
 import com.github.card.usecases.purchasephysical.FindPurchaseByCodeUseCase;
 import com.github.card.util.TypePurchaseConst;

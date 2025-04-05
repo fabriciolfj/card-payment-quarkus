@@ -1,4 +1,4 @@
-package com.github.card.entrypoints.http;
+package com.github.card.entrypoints.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;

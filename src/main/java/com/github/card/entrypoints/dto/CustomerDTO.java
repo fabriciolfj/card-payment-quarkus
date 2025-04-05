@@ -1,4 +1,4 @@
-package com.github.card.entrypoints.http;
+package com.github.card.entrypoints.dto;
 
 import jakarta.validation.constraints.NotNull;
 

@@ -1,7 +1,4 @@
-package com.github.card.entrypoints.http;
-
-import com.github.card.entities.common.Card;
-import com.github.card.entities.physical.GeoLocation;
+package com.github.card.entrypoints.dto;
 
 public record PurchaseResponseDTO(
     String code,

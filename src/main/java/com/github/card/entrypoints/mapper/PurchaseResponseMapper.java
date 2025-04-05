@@ -1,6 +1,7 @@
-package com.github.card.entrypoints.http;
+package com.github.card.entrypoints.mapper;
 
 import com.github.card.entities.physical.Purchase;
+import com.github.card.entrypoints.dto.PurchaseResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
