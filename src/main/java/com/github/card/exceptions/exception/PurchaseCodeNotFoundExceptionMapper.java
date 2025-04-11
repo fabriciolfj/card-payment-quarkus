@@ -5,6 +5,10 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Collections;
+
 @Provider
 public class PurchaseCodeNotFoundExceptionMapper implements ExceptionMapper<PurchaseCodeNotFoundException> {
 
@@ -12,7 +16,10 @@ public class PurchaseCodeNotFoundExceptionMapper implements ExceptionMapper<Purc
     public Response toResponse(PurchaseCodeNotFoundException exception) {
         return Response
                 .status(Response.Status.NOT_FOUND)
-                .entity(new ErrorDTO(exception.getMessage()))
+                .entity(new ErrorDTO(Response.Status.NOT_FOUND.getStatusCode(),
+                        LocalDateTime.now().toEpochSecond(ZoneOffset.UTC),
+                        exception.getMessage(),
+                        Collections.emptyList()))
                 .build();
     }
 }
