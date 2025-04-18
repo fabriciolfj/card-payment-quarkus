@@ -12,7 +12,7 @@ public class EnrichPurchaseAdapter {
     private final CustomerRepository customerRepository;
 
     public PurchaseData process(final PurchaseData data) {
-        var customer = customerRepository.findByCode(data.getCustomer());
+        var customer = customerRepository.findByCodeOrSave(data.getCustomer());
         data.setCustomer(customer);
 
         return data;

@@ -18,6 +18,7 @@ public interface PurchaseResponseMapper {
     @Mapping(source = "card", target = "card")
     @Mapping(source = "geoLocation", target = "geoLocation")
     @Mapping(target = "type", constant = "PHYSICAL")
+    @Mapping(target = "status", expression = "java(getStatusDescribe())")
     PurchaseResponseDTO toDto(Purchase purchase);
     
     @Mapping(source = "crypt", target = "crypt")

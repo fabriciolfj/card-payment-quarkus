@@ -14,6 +14,17 @@ CREATE TABLE purchase (
     constraint fk_customer foreign key (customer_id) references customer (id)
 );
 
+
+-- Criação da tabela de compra status
+CREATE TABLE purchase_status (
+    purchase_id bigint NOT NULL,
+    status varchar(20) NOT NULL,
+    registry TIMESTAMP NOT NULL,
+    constraint fk_purchase foreign key (purchase_id) references purchase (id),
+    constraint uk_status (status, purchase_id),
+    constraint check_status CHECK (status IN ('PENDENTE', 'ASSESSMENT', 'VALID', 'DENIED'))
+);
+
 -- Criação da tabela de cartão
 CREATE TABLE card (
     id SERIAL PRIMARY KEY,

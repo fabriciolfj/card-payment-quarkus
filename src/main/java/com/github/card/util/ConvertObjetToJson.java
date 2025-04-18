@@ -15,6 +15,15 @@ public class ConvertObjetToJson {
         }
     }
 
+    public static <T> T toObject(final String json, final Class<T> clazz) {
+        try {
+            var mapper = getObjectMapper();
+            return mapper.readValue(json, clazz);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     private static ObjectMapper getObjectMapper() {
         if (OBJECT_MAPPER == null) {
             OBJECT_MAPPER = new ObjectMapper();

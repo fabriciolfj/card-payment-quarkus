@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 public enum ErrorsEnuns {
 
+    STATUS_NOTFOUND,
     FAIL_SAVE_PURCHASE;
 
     public String toMessage() {

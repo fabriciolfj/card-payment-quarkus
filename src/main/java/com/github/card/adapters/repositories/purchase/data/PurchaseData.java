@@ -30,6 +30,9 @@ public class PurchaseData {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<CardData> cards;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PurchaseStatusData> status;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private CustomerData customer;
@@ -39,4 +42,8 @@ public class PurchaseData {
 
     @Column()
     private double longitude;
+
+    public List<String> getStatusDescribe() {
+        return status.stream().map(PurchaseStatusData::getStatus).toList();
+    }
 }

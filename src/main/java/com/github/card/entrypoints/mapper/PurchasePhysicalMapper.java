@@ -1,5 +1,6 @@
 package com.github.card.entrypoints.mapper;
 
+import com.github.card.entities.common.Status;
 import com.github.card.entities.physical.Purchase;
 import com.github.card.entrypoints.dto.PurchasePhysicalDTO;
 import org.mapstruct.Mapper;
@@ -19,5 +20,6 @@ public interface PurchasePhysicalMapper {
     @Mapping(source = "expirationDate", target = "card.expirationDate")
     @Mapping(source = "value", target = "card.value")
     @Mapping(source = "crypt", target = "card.crypt")
+    @Mapping(target = "status", expression = "java(java.util.List.of(Status.PENDENTE))")
     Purchase toEntity(PurchasePhysicalDTO dto);
 }

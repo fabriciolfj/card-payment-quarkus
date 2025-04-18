@@ -22,15 +22,15 @@ public class PurchasePhysicalUseCase implements PurchaseUseCase {
     @Override
     public void execute(Purchase purchase) {
         ofNullable(purchase)
-                .map(p -> {
-                    gateway.process(p);
-                    return p;
-                })
-                .map(p -> {
-                    notifyGateway.process(p);
-                    return p;
-                })
-                .orElseThrow(() -> new IllegalArgumentException("purchase cannot be null"));
+                .ifPresentOrElse(
+                        p -> {
+                            gateway.process(p);
+                            notifyGateway.process(p);
+                        },
+                        () -> {
+                            throw new IllegalArgumentException("purchase cannot be null");
+                        }
+                );
     }
 
     @Override

@@ -8,11 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Named;
 
 @RequiredArgsConstructor
 @ApplicationScoped
-@Named("findPurchaseByCode")
 public class FindPurchaseByCodeUseCase {
 
     private static final Logger log = LoggerFactory.getLogger(FindPurchaseByCodeUseCase.class);
@@ -20,7 +18,7 @@ public class FindPurchaseByCodeUseCase {
     private final FindPurchaseByCodeGateway gateway;
     
     @Transactional(Transactional.TxType.SUPPORTS)
-    public Purchase execute(String code) {
+    public Purchase execute(final String code) {
         log.info("Executing find purchase by code use case for: {}", code);
         return gateway.findByCode(code);
     }
