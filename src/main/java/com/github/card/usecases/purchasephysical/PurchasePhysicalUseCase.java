@@ -20,7 +20,7 @@ public class PurchasePhysicalUseCase implements PurchaseUseCase {
     private final PurchasePhysicalNotifyGateway notifyGateway;
 
     @Override
-    public void execute(Purchase purchase) {
+    public void execute(final Purchase purchase) {
         ofNullable(purchase)
                 .ifPresentOrElse(
                         p -> {
