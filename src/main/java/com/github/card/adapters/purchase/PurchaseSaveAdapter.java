@@ -5,7 +5,6 @@ import com.github.card.entities.physical.Purchase;
 import com.github.card.exceptions.exception.SavePurchaseException;
 import com.github.card.usecases.common.PurchaseSaveGateway;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +21,6 @@ public class PurchaseSaveAdapter implements PurchaseSaveGateway {
     private final EnrichPurchaseAdapter enrichPurchaseAdapter;
 
     @Override
-    @Transactional(Transactional.TxType.REQUIRED)
     public void process(Purchase purchase) {
         try {
             var data = enrichPurchaseAdapter.process(toData(purchase));

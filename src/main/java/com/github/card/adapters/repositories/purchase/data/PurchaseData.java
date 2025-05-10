@@ -1,6 +1,8 @@
 package com.github.card.adapters.repositories.purchase.data;
 
 import com.github.card.adapters.repositories.customer.data.CustomerData;
+import com.github.card.entities.common.Status;
+import io.opentelemetry.sdk.trace.data.StatusData;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +21,7 @@ public class PurchaseData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String code;
 
     @JoinTable(
@@ -31,6 +33,7 @@ public class PurchaseData {
     private List<CardData> cards;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "purchase_id")
     private List<PurchaseStatusData> status;
 
     @ManyToOne
@@ -45,5 +48,10 @@ public class PurchaseData {
 
     public List<String> getStatusDescribe() {
         return status.stream().map(PurchaseStatusData::getStatus).toList();
+    }
+
+    public PurchaseData addStatus(final List<PurchaseStatusData> statusDatas) {
+        this.getStatus().addAll(statusDatas);
+        return this;
     }
 }

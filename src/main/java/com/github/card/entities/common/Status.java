@@ -1,5 +1,7 @@
 package com.github.card.entities.common;
 
+import com.github.card.exceptions.exception.StatusNotFoundException;
+
 import java.util.stream.Stream;
 
 public enum Status {
@@ -13,10 +15,10 @@ public enum Status {
         return this.name();
     }
 
-    public Status toStatus(final String describe) {
+    public static Status toStatus(final String describe) {
         return Stream.of(values())
                 .filter(v -> v.name().equalsIgnoreCase(describe))
                 .findFirst()
-                .orElseThrow(() -> )
+                .orElseThrow(StatusNotFoundException::new);
     }
 }

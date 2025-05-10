@@ -1,7 +1,6 @@
 package com.github.card.usecases.fraud;
 
 import com.github.card.entities.common.Status;
-import com.github.card.entities.physical.Purchase;
 import com.github.card.usecases.purchasephysical.FindPurchaseByCodeUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +22,9 @@ public class CheckRiskPurchaseUseCase {
 
     private final List<ValidationRiskUseCase> riskUseCases;
     private final FindPurchaseByCodeUseCase findPurchaseByCodeUseCase;
+    private final UpdateStatusPurchaseGateway updateStatusPurchaseGateway;
 
-    public Purchase execute(final String code) {
+    public void execute(final String code) {
         var purchase = findPurchaseByCodeUseCase.execute(code);
 
         var result = riskUseCases.stream()
@@ -35,14 +35,14 @@ public class CheckRiskPurchaseUseCase {
                         Collectors.counting())
                 );
 
-        switch (getLevelRisk(result)) {
+        var purchaseUpdated = switch (getLevelRisk(result)) {
             case GREAT -> purchase.updateStatus(Status.VALID);
             case AVERAGE -> purchase.updateStatus(Status.ASSESSMENT);
             default -> purchase.updateStatus(Status.DENIED);
-        }
+        };
 
-        log.info("evaluated purchase {}-{}", purchase.code(), purchase.status());
-        return purchase;
+        log.info("evaluated purchase {}-{}", purchaseUpdated.code(), purchaseUpdated.status());
+        updateStatusPurchaseGateway.process(purchaseUpdated);
     }
 
     private static int getLevelRisk(final Map<Boolean, Long> risk) {

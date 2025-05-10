@@ -21,22 +21,21 @@ public class PurchaseDataMapper {
         var customer = CustomerDataMapper.INSTANCE.toData(entity.customer());
         var regsitry = LocalDateTime.now();
 
-        return PurchaseData.builder()
+        var data = PurchaseData.builder()
                 .customer(customer)
+                .code(entity.code())
                 .cards(cards)
-                .status(entity
-                        .status()
-                        .stream()
-                        .map(v ->
-                                new PurchaseStatusData(
-                                        new PurchaseStatusId(null, v.name()),
-                                        regsitry)
-                        )
-                        .toList()
-                )
                 .longitude(entity.getLongitude())
                 .latitude(entity.getLatitude())
                 .build();
+
+        data.setStatus(entity
+                .status()
+                .stream()
+                .map(v -> mapperStatusData(v, data, regsitry))
+                .toList());
+
+        return data;
     }
 
     public static Purchase toEntity(final PurchaseData data) {
@@ -50,6 +49,24 @@ public class PurchaseDataMapper {
                                 Status.valueOf(v.getStatus())).toList(),
                 card,
                 customer,
-                new GeoLocation(data.getLongitude(), data.getLongitude()));
+                new GeoLocation(data.getLatitude(), data.getLongitude()));
+    }
+
+    public static PurchaseData enrichStatusData(final PurchaseData data, final List<Status> status) {
+        var result = status
+                .stream()
+                .map(value -> mapperStatusData(value, data, LocalDateTime.now()))
+                .toList();
+
+        return data.addStatus(result);
+    }
+
+    private static PurchaseStatusData mapperStatusData(final Status status, final PurchaseData data, final LocalDateTime regsitry) {
+        var id = new PurchaseStatusId();
+        id.setStatus(status.name());
+        id.setPurchase(data);
+        return new PurchaseStatusData(
+                id,
+                regsitry);
     }
 }

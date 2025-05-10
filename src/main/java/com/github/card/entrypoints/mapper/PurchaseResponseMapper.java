@@ -18,13 +18,8 @@ public interface PurchaseResponseMapper {
     @Mapping(source = "card", target = "card")
     @Mapping(source = "geoLocation", target = "geoLocation")
     @Mapping(target = "type", constant = "PHYSICAL")
-    @Mapping(target = "status", expression = "java(getStatusDescribe())")
+    @Mapping(target = "status", expression = "java(purchase.getStatusDescribe())")
     PurchaseResponseDTO toDto(Purchase purchase);
-    
-    @Mapping(source = "crypt", target = "crypt")
-    @Mapping(source = "expirationDate", target = "expirationDate", qualifiedByName = "formatDateTime")
-    @Mapping(source = "balance", target = "balance")
-    PurchaseResponseDTO.CardDTO toCardDto(com.github.card.entities.common.Card card);
     
     @Named("formatDateTime")
     default String formatDateTime(LocalDateTime dateTime) {

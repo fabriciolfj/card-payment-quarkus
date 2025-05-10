@@ -1,6 +1,5 @@
 package com.github.card.entrypoints.mapper;
 
-import com.github.card.entities.common.Status;
 import com.github.card.entities.physical.Purchase;
 import com.github.card.entrypoints.dto.PurchasePhysicalDTO;
 import org.mapstruct.Mapper;
