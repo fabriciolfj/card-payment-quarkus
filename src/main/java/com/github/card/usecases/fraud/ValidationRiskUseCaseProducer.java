@@ -11,8 +11,12 @@ public class ValidationRiskUseCaseProducer {
     @Produces
     public List<ValidationRiskUseCase> produceValidationRiskUseCases(
             ValidationRiskDistanceUseCase distanceUseCase,
-            ValidationRiskAmountUseCase amountUseCase) {
+            ValidationRiskAmountUseCase amountUseCase,
+            FrequencyTransactionUseCase frequencyTransactionUseCase,
+            HoursValidUseCase hoursValidUseCase,
+            SpeedValidationUseCase speedValidationUseCase,
+            MerchantValidationUseCase merchantValidationUseCase) {
 
-        return List.of(distanceUseCase, amountUseCase);
+        return List.of(distanceUseCase, amountUseCase, frequencyTransactionUseCase, hoursValidUseCase, speedValidationUseCase, merchantValidationUseCase);
     }
 }

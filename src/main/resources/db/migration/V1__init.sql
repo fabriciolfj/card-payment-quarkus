@@ -10,6 +10,7 @@ CREATE TABLE purchase (
     id SERIAL PRIMARY KEY,
     latitude DOUBLE PRECISION,
     longitude DOUBLE PRECISION,
+    registry TIMESTAMP NOT NULL,
     customer_id bigint,
     constraint fk_customer foreign key (customer_id) references customer (id)
 );
