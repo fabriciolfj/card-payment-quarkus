@@ -24,6 +24,7 @@ public class CheckRiskPurchaseUseCase {
     private final FindPurchaseByCodeUseCase findPurchaseByCodeUseCase;
     private final UpdateStatusPurchaseGateway updateStatusPurchaseGateway;
 
+    //TODO mudar para sistema de pontuacao
     public void execute(final String code) {
         var purchase = findPurchaseByCodeUseCase.execute(code);
 
