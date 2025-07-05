@@ -1,11 +1,10 @@
 package com.github.card.adapters.repositories.purchase.data;
 
 import com.github.card.adapters.repositories.customer.data.CustomerData;
-import com.github.card.entities.common.Status;
-import io.opentelemetry.sdk.trace.data.StatusData;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -39,6 +38,9 @@ public class PurchaseData {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private CustomerData customer;
+
+    @Column(name = "registry", nullable = false)
+    private LocalDateTime registry;
 
     @Column()
     private double latitude;

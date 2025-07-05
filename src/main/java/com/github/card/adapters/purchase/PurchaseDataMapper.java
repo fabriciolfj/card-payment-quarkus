@@ -25,6 +25,7 @@ public class PurchaseDataMapper {
                 .customer(customer)
                 .code(entity.code())
                 .cards(cards)
+                .registry(LocalDateTime.now())
                 .longitude(entity.getLongitude())
                 .latitude(entity.getLatitude())
                 .build();
